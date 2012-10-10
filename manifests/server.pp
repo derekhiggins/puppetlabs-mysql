@@ -26,9 +26,9 @@ class mysql::server (
 
   Class['mysql::server'] -> Class['mysql::config']
 
-  $config_class = { 'mysql::config' => $config_hash }
-
-  create_resources( 'class', $config_class )
+  class {'mysql::config':
+    bind_address => $config_hash['bind_address'],
+  }
 
   package { 'mysql-server':
     ensure => $package_ensure,
